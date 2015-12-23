@@ -1,2 +1,2 @@
-Контактное лицо: [Евгений Факторович](mailto:sun@spb.ant-inform.ru)
-Задание: `docs/Задание.pdf`
+* Контактное лицо: [Евгений Факторович](mailto:sun@spb.ant-inform.ru)
+* Задание: `docs/Задание.pdf`
