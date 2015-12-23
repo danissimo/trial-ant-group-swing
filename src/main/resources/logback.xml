@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<configuration>
+	<evaluator name="EVAL_ERROR">
+		<expression>event.getLevel().toInt() == Level.ERROR.toInt()</expression>
+	</evaluator>
+	<evaluator name="EVAL_NOT_ERROR">
+		<expression>event.getLevel().toInt() != Level.ERROR.toInt()</expression>
+	</evaluator>
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>app.log</file>
+		<append>false</append>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<!-- %throwable{full, EVAL_NOT_ERROR} triggers if EVAL_NOT_ERROR returns a NEGATIVE result -->
+			<pattern>%date{MMdd-HHmmss.SSS} %.-1level %thread/%logger{0} - %message%n%throwable{0, EVAL_ERROR}%throwable{full, EVAL_NOT_ERROR}</pattern>
+			<outputPatternAsHeader>true</outputPatternAsHeader>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<pattern>%date{MMdd-HHmmss.SSS} %.-1level %thread/%logger{0} - %message%n%throwable{0, EVAL_ERROR}%throwable{full, EVAL_NOT_ERROR}</pattern>
+		</encoder>
+	</appender>
+
+	<root level="ALL">
+		<appender-ref ref="FILE"/>
+		<appender-ref ref="STDOUT"/>
+	</root>
+</configuration>
